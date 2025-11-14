@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="vi" class="scroll-smooth">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT Business Analyst Portfolio</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        /* Lazy Loading */
+        img[loading="lazy"] {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        img.loaded {
+            animation: fadeInImage 0.3s ease-in;
+        }
+        
+        @keyframes fadeInImage {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        .animate-slideInLeft {
+            animation: slideInLeft 0.6s ease-out forwards;
+        }
+        
+        .animate-slideInRight {
+            animation: slideInRight 0.6s ease-out forwards;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #1e40af 0%, #6d28d9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        .skill-bar {
+            position: relative;
+            overflow: hidden;
+            background: #e5e7eb;
+            height: 8px;
+            border-radius: 4px;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #1e40af, #6d28d9);
+            border-radius: 4px;
+            transition: width 0.8s ease-in-out;
+            width: 0%;
+        }
+        
+        .nav-link {
+            position: relative;
+            font-weight: 500;
+            color: #374151;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: linear-gradient(90deg, #1e40af, #6d28d9);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #1e40af;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Water Wave Animation */
+        @keyframes wave {
+            0% {
+                transform: translateX(0) translateY(0);
+            }
+            25% {
+                transform: translateX(10px) translateY(-5px);
+            }
+            50% {
+                transform: translateX(0) translateY(0);
+            }
+            75% {
+                transform: translateX(-10px) translateY(5px);
+            }
+            100% {
+                transform: translateX(0) translateY(0);
+            }
+        }
+
+        @keyframes ripple {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 30px rgba(255, 255, 255, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 30px rgba(255, 255, 255, 0);
+            }
+        }
+
+        @keyframes shimmer {
+            0%, 100% {
+                opacity: 0.5;
+                transform: skewX(-10deg);
+            }
+            50% {
+                opacity: 1;
+                transform: skewX(10deg);
+            }
+        }
+
+        .water-wave {
+            animation: wave 3s ease-in-out infinite;
+        }
+
+        .ripple-effect {
+            animation: ripple 2s ease-out infinite;
+        }
+
+        .shimmer-effect {
+            animation: shimmer 2.5s ease-in-out infinite;
+        }
+
+        .contact-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        /* Water Drop Animation */
+        @keyframes dropFall {
+            0% {
+                transform: translateY(-100vh) translateX(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) translateX(20px);
+                opacity: 0;
+            }
+        }
+
+        @keyframes dropSplash {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        .water-drop {
+            position: fixed;
+            pointer-events: none;
+            font-size: 24px;
+            z-index: 5;
+        }
+
+        .drop-fall {
+            animation: dropFall var(--duration) linear forwards;
+        }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="bg-white text-gray-800 font-sans overflow-x-hidden"><!-- Navigation -->
+  <nav class="fixed top-0 w-full z-50 bg-white shadow-sm border-b border-gray-200">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center py-4">
+     <div class="text-2xl font-bold gradient-text">NMT</div>
+     <div class="hidden md:flex space-x-8">
+      <a href="#home" class="nav-link">Trang chủ</a>
+      <a href="#about" class="nav-link">Giới thiệu</a>
+      <a href="#experience" class="nav-link">Kinh nghiệm</a>
+      <a href="#skills" class="nav-link">Kỹ năng</a>
+      <a href="#projects" class="nav-link">Dự án</a>
+      <a href="#contact" class="nav-link">Liên hệ</a>
+     </div>
+     <button id="mobile-menu-btn" class="md:hidden text-gray-700">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+     </button>
+    </div>
+   </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="min-h-screen flex items-center justify-center pt-20 px-4 bg-gradient-to-br from-blue-50 to-indigo-50">
+   <div class="max-w-4xl w-full">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+     <div class="order-2 md:order-1">
+      <div class="w-full max-w-sm mx-auto">
+       <div class="bg-gray-300 rounded-xl overflow-hidden shadow-xl h-96 animate-slideInLeft opacity-0" style="animation-delay: 0.2s;">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect fill='%23ddd' width='400' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='24' text-anchor='middle' dominant-baseline='middle' fill='%23999'%3EProfessional Photo%3C/text%3E%3C/svg%3E" alt="Profile" class="w-full h-full object-cover" loading="lazy">
+       </div>
+      </div>
+     </div>
+     <div class="order-1 md:order-2">
+      <div class="animate-slideInRight opacity-0" style="animation-delay: 0.2s;">
+       <h1 id="hero-name" class="text-5xl md:text-6xl font-bold mb-4 text-gray-900">Nguyễn Đình Việt</h1>
+      </div>
+      <div class="animate-slideInRight opacity-0" style="animation-delay: 0.3s;">
+       <h2 id="hero-title" class="text-2xl md:text-3xl text-indigo-600 mb-6 font-semibold">Business Analyst</h2>
+      </div>
+      <div class="animate-slideInRight opacity-0" style="animation-delay: 0.4s;">
+       <p id="hero-description" class="text-lg text-gray-600 mb-8 leading-relaxed">Chuyên gia phân tích nghiệp vụ với kinh nghiệm trong việc cầu nối giữa business và technology, xây dựng các giải pháp tối ưu cho doanh nghiệp</p>
+      </div>
+      <div class="animate-slideInRight opacity-0" style="animation-delay: 0.5s;">
+       <div class="flex flex-wrap gap-4">
+        <a href="#contact" class="inline-block bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg">
+         Liên hệ tôi →
+        </a>
+        <a href="TTS_BA_NGUYỄN ĐÌNH VIỆT.pdf" target="_blank" rel="noopener noreferrer" class="inline-block bg-white border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-50 px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg">
+         📄 Xem CV
+        </a>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>  <!-- About Section -->
+  <section id="about" class="py-20 px-4 bg-white">
+   <div class="max-w-6xl mx-auto">
+    <div class="mb-16">
+     <h2 class="text-4xl font-bold mb-3 text-gray-900">Giới thiệu</h2>
+     <div class="w-16 h-1 bg-gradient-to-r from-indigo-600 to-blue-600 rounded-full"></div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+     <div class="animate-slideInLeft opacity-0" style="animation-delay: 0.2s;">
+      <h3 class="text-3xl font-bold mb-6 text-gray-900">Về tôi</h3>
+      <p id="about-text" class="text-gray-600 leading-relaxed mb-8 text-lg">Tôi là một Business Analyst với đam mê phân tích các yêu cầu nghiệp vụ phức tạp và chuyển đổi chúng thành các giải pháp công nghệ hiệu quả. Với kinh nghiệm trong việc xây dựng Use Case, BRD/SRS, Activity Diagram và tối ưu hóa các quy trình, tôi đã giúp nhiều doanh nghiệp đạt được mục tiêu số hóa của họ.</p>
+      <div class="flex flex-wrap gap-3">
+       <span class="px-4 py-2 bg-blue-100 text-blue-700 rounded-lg text-sm font-medium">Use Case & UML</span>
+       <span class="px-4 py-2 bg-indigo-100 text-indigo-700 rounded-lg text-sm font-medium">BRD/SRS</span>
+       <span class="px-4 py-2 bg-purple-100 text-purple-700 rounded-lg text-sm font-medium">Activity Diagram</span>
+      </div>
+     </div>
+     <div class="animate-slideInRight opacity-0" style="animation-delay: 0.2s;">
+      <div class="grid grid-cols-2 gap-6">
+       <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-xl border border-blue-200">
+        <div class="text-4xl font-bold text-blue-600 mb-2">3+</div>
+        <div class="text-gray-700 font-semibold">Năm BA</div>
+       </div>
+       <div class="card-hover bg-gradient-to-br from-indigo-50 to-indigo-100 p-8 rounded-xl border border-indigo-200">
+        <div class="text-4xl font-bold text-indigo-600 mb-2">5+</div>
+        <div class="text-gray-700 font-semibold">Năm kinh nghiệm</div>
+       </div>
+       <div class="card-hover bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-xl border border-purple-200">
+        <div class="text-4xl font-bold text-purple-600 mb-2">UML</div>
+        <div class="text-gray-700 font-semibold">Use Case</div>
+       </div>
+       <div class="card-hover bg-gradient-to-br from-yellow-50 to-orange-100 p-8 rounded-xl border border-yellow-200">
+        <div class="text-4xl font-bold text-yellow-600 mb-2">🎯</div>
+        <div class="text-gray-700 font-semibold">BRD/SRS</div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>  <!-- Experience Section -->
+  <section id="experience" class="py-20 px-4 bg-gray-50">
+   <div class="max-w-6xl mx-auto">
+    <div class="mb-16">
+     <h2 class="text-4xl font-bold mb-3 text-gray-900">Kinh nghiệm làm việc</h2>
+     <div class="w-16 h-1 bg-gradient-to-r from-indigo-600 to-blue-600 rounded-full"></div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-12">
+     <!-- Left Column: Chuyên ngành -->
+     <div>
+      <h3 class="text-2xl font-bold text-gray-900 mb-8 flex items-center">
+       <span class="w-3 h-3 bg-indigo-600 rounded-full mr-3"></span>
+       Kinh nghiệm chuyên ngành
+      </h3>
+      <div class="space-y-6">
+       <!-- Job 1 -->
+       <div class="card-hover bg-white border border-gray-200 rounded-xl p-8 animate-slideInLeft opacity-0" style="animation-delay: 0.1s;">
+        <div class="flex justify-between items-start mb-3">
+         <div>
+          <h4 class="text-xl font-bold text-gray-900">Alibaba Vietnam</h4>
+          <p class="text-indigo-600 font-semibold">Business Analyst</p>
+         </div>
+         <span class="text-sm bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full">02/2025 - 04/2025</span>
+        </div>
+        <p class="text-gray-600 leading-relaxed mb-4">Giải quyết các cho hàng ~2000 khách hàng, tối ưu hóa sale journey & tăng conversion rate.</p>
+        <div class="flex flex-wrap gap-2">
+         <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-xs font-medium">Use Case</span>
+         <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">BRD/SRS</span>
+         <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-medium">Process Mapping</span>
+        </div>
+       </div>
+
+       <!-- Job 2 -->
+       <div class="card-hover bg-white border border-gray-200 rounded-xl p-8 animate-slideInLeft opacity-0" style="animation-delay: 0.2s;">
+        <div class="flex justify-between items-start mb-3">
+         <div>
+          <h4 class="text-xl font-bold text-gray-900">Sunny Garden Coffee</h4>
+          <p class="text-indigo-600 font-semibold">Business Analyst</p>
+         </div>
+         <span class="text-sm bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full">01/2024 - 01/2024</span>
+        </div>
+        <p class="text-gray-600 leading-relaxed mb-4">Làm việc với hệ thống quản lý tập trung cửa hàng, lập kế hoạch nâng cao chiến lược kinh doanh & tối ưu hóa các quy trình chi phí.</p>
+        <div class="flex flex-wrap gap-2">
+         <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-xs font-medium">Activity Diagram</span>
+         <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">ERP System</span>
+         <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-medium">Data Analysis</span>
+        </div>
+       </div>
+      </div>
+     </div>
+
+     <!-- Right Column: Xã hội -->
+     <div>
+      <h3 class="text-2xl font-bold text-gray-900 mb-8 flex items-center">
+       <span class="w-3 h-3 bg-purple-600 rounded-full mr-3"></span>
+       Kinh nghiệm xã hội
+      </h3>
+      <div class="space-y-6">
+       <!-- Job 1 -->
+       <div class="card-hover bg-white border border-gray-200 rounded-xl p-8 animate-slideInRight opacity-0" style="animation-delay: 0.1s;">
+        <div class="flex justify-between items-start mb-3">
+         <div>
+          <h4 class="text-xl font-bold text-gray-900">Liên Chi Đoàn - Liên chi hội sinh viên</h4>
+          <p class="text-purple-600 font-semibold">Trưởng ban Ngôi sao</p>
+         </div>
+         <span class="text-sm bg-purple-100 text-purple-700 px-3 py-1 rounded-full">2023 - Nay</span>
+        </div>
+        <p class="text-gray-600 leading-relaxed mb-4">Tổ chức các sự kiện, tham gia lên kế hoạch và xây dựng kế hoạch hành động cho sinh viên trong trường. Phối hợp với các đơn vị liên quan để tổ chức các hoạt động ngoại khóa.</p>
+        <div class="flex flex-wrap gap-2">
+         <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-medium">Event Planning</span>
+         <span class="px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-xs font-medium">Leadership</span>
+         <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-medium">Coordination</span>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="py-20 px-4 bg-gray-50">
+   <div class="max-w-6xl mx-auto">
+    <div class="mb-16">
+     <h2 class="text-4xl font-bold mb-3 text-gray-900">Kỹ năng chuyên môn</h2>
+     <div class="w-16 h-1 bg-gradient-to-r from-indigo-600 to-blue-600 rounded-full"></div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-16">
+     <div class="space-y-8 animate-slideInLeft opacity-0" style="animation-delay: 0.2s;">
+      <h3 class="text-2xl font-bold text-gray-900 mb-8">Technical Skills</h3>
+      <div class="skill-item">
+       <div class="flex justify-between mb-3">
+        <span class="font-semibold text-gray-700">Business Analysis</span>
+        <span class="text-indigo-600 font-semibold">95%</span>
+       </div>
+       <div class="skill-bar">
+        <div class="skill-progress" data-width="95"></div>
+       </div>
+      </div>
+      <div class="skill-item">
+       <div class="flex justify-between mb-3">
+        <span class="font-semibold text-gray-700">SQL &amp; Database</span>
+        <span class="text-indigo-600 font-semibold">90%</span>
+       </div>
+       <div class="skill-bar">
+        <div class="skill-progress" data-width="90"></div>
+       </div>
+      </div>
+      <div class="skill-item">
+       <div class="flex justify-between mb-3">
+        <span class="font-semibold text-gray-700">Data Analysis</span>
+        <span class="text-indigo-600 font-semibold">88%</span>
+       </div>
+       <div class="skill-bar">
+        <div class="skill-progress" data-width="88"></div>
+       </div>
+      </div>
+      <div class="skill-item">
+       <div class="flex justify-between mb-3">
+        <span class="font-semibold text-gray-700">System Design</span>
+        <span class="text-indigo-600 font-semibold">85%</span>
+       </div>
+       <div class="skill-bar">
+        <div class="skill-progress" data-width="85"></div>
+       </div>
+      </div>
+     </div>
+     <div class="animate-slideInRight opacity-0" style="animation-delay: 0.2s;">
+      <h3 class="text-2xl font-bold text-gray-900 mb-8">Tools &amp; Methodologies</h3>
+      <div class="grid grid-cols-2 gap-4">
+       <div class="card-hover bg-white p-6 rounded-lg border border-gray-200">
+        <div class="text-3xl mb-3">📊</div>
+        <div class="font-semibold text-gray-700">Power BI</div>
+       </div>
+       <div class="card-hover bg-white p-6 rounded-lg border border-gray-200">
+        <div class="text-3xl mb-3">📈</div>
+        <div class="font-semibold text-gray-700">Tableau</div>
+       </div>
+       <div class="card-hover bg-white p-6 rounded-lg border border-gray-200">
+        <div class="text-3xl mb-3">🔄</div>
+        <div class="font-semibold text-gray-700">Agile/Scrum</div>
+       </div>
+       <div class="card-hover bg-white p-6 rounded-lg border border-gray-200">
+        <div class="text-3xl mb-3">📋</div>
+        <div class="font-semibold text-gray-700">JIRA</div>
+       </div>
+       <div class="card-hover bg-white p-6 rounded-lg border border-gray-200">
+        <div class="text-3xl mb-3">🎯</div>
+        <div class="font-semibold text-gray-700">Confluence</div>
+       </div>
+       <div class="card-hover bg-white p-6 rounded-lg border border-gray-200">
+        <div class="text-3xl mb-3">📐</div>
+        <div class="font-semibold text-gray-700">Visio</div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>  <!-- Projects Section -->
+  <section id="projects" class="py-20 px-4 bg-white">
+   <div class="max-w-6xl mx-auto">
+    <div class="mb-16">
+     <h2 class="text-4xl font-bold mb-3 text-gray-900">Dự án nổi bật</h2>
+     <div class="w-16 h-1 bg-gradient-to-r from-indigo-600 to-blue-600 rounded-full"></div>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+     <div class="card-hover bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-lg">
+      <div class="h-48 bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
+       <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200'%3E%3Crect fill='%23dbeafe' width='300' height='200'/%3E%3Ctext x='50%25' y='50%25' font-size='20' text-anchor='middle' dominant-baseline='middle' fill='%23999'%3EProject Thumbnail%3C/text%3E%3C/svg%3E" alt="Project" class="w-full h-full object-cover" loading="lazy">
+      </div>
+      <div class="p-6">
+       <div class="text-4xl mb-3">🏦</div>
+       <h3 class="text-xl font-bold mb-3 text-gray-900">Banking System Modernization</h3>
+       <p class="text-gray-600 mb-4 leading-relaxed">Phân tích và thiết kế hệ thống ngân hàng core banking mới, tăng hiệu suất xử lý giao dịch lên 300%.</p>
+       <div class="flex flex-wrap gap-2">
+        <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">SQL Server</span>
+        <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-xs font-medium">Business Process</span>
+        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-medium">Risk Analysis</span>
+       </div>
+      </div>
+     </div>
+     <div class="card-hover bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-lg">
+      <div class="h-48 bg-gradient-to-br from-indigo-100 to-indigo-200 flex items-center justify-center">
+       <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200'%3E%3Crect fill='%23e0e7ff' width='300' height='200'/%3E%3Ctext x='50%25' y='50%25' font-size='20' text-anchor='middle' dominant-baseline='middle' fill='%23999'%3EProject Thumbnail%3C/text%3E%3C/svg%3E" alt="Project" class="w-full h-full object-cover" loading="lazy">
+      </div>
+      <div class="p-6">
+       <div class="text-4xl mb-3">🛒</div>
+       <h3 class="text-xl font-bold mb-3 text-gray-900">E-commerce Analytics Platform</h3>
+       <p class="text-gray-600 mb-4 leading-relaxed">Xây dựng nền tảng phân tích dữ liệu cho hệ thống thương mại điện tử, cải thiện conversion rate 45%.</p>
+       <div class="flex flex-wrap gap-2">
+        <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">Power BI</span>
+        <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-xs font-medium">Data Mining</span>
+        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-medium">KPI Dashboard</span>
+       </div>
+      </div>
+     </div>
+     <div class="card-hover bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-lg">
+      <div class="h-48 bg-gradient-to-br from-purple-100 to-purple-200 flex items-center justify-center">
+       <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200'%3E%3Crect fill='%23f3e8ff' width='300' height='200'/%3E%3Ctext x='50%25' y='50%25' font-size='20' text-anchor='middle' dominant-baseline='middle' fill='%23999'%3EProject Thumbnail%3C/text%3E%3C/svg%3E" alt="Project" class="w-full h-full object-cover" loading="lazy">
+      </div>
+      <div class="p-6">
+       <div class="text-4xl mb-3">🏥</div>
+       <h3 class="text-xl font-bold mb-3 text-gray-900">Healthcare Management System</h3>
+       <p class="text-gray-600 mb-4 leading-relaxed">Thiết kế quy trình quản lý bệnh viện số hóa, giảm thời gian chờ đợi của bệnh nhân 60%.</p>
+       <div class="flex flex-wrap gap-2">
+        <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">Process Mapping</span>
+        <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-xs font-medium">Workflow</span>
+        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-medium">Integration</span>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>  <!-- Contact Section -->
+  <section id="contact" class="py-20 px-4 bg-gradient-to-br from-blue-600 via-indigo-600 to-blue-700 relative overflow-hidden">
+   <!-- Water wave background elements -->
+   <div class="absolute top-0 left-0 w-full h-1 bg-blue-400 opacity-30 water-wave"></div>
+   <div class="absolute bottom-0 right-0 w-full h-1 bg-blue-400 opacity-20 water-wave" style="animation-delay: 0.5s;"></div>
+
+   <div class="max-w-4xl mx-auto relative z-10">
+    <div class="text-center text-white mb-16 animate-slideInRight opacity-0" style="animation-delay: 0.1s;">
+     <h2 class="text-4xl font-bold mb-3">Bắt đầu dự án mới</h2>
+     <p class="text-xl opacity-90">Sẵn sàng hợp tác trong dự án tiếp theo của bạn</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8 mb-12">
+     <!-- Email Card -->
+     <div class="contact-card bg-white bg-opacity-10 backdrop-blur p-8 rounded-xl border border-white border-opacity-30 hover:bg-opacity-20 transition-all duration-300 ripple-effect animate-slideInLeft opacity-0" style="animation-delay: 0.2s;">
+      <div class="text-5xl mb-4">📧</div>
+      <h3 class="font-bold mb-3 text-white text-lg">Email</h3>
+      <p id="contact-email" class="text-blue-100 font-medium break-all">vietnguyendj2004@gmail.com</p>
+     </div>
+
+     <!-- Phone Card -->
+     <div class="contact-card bg-white bg-opacity-10 backdrop-blur p-8 rounded-xl border border-white border-opacity-30 hover:bg-opacity-20 transition-all duration-300 ripple-effect animate-slideInLeft opacity-0" style="animation-delay: 0.25s;">
+      <div class="text-5xl mb-4">📱</div>
+      <h3 class="font-bold mb-3 text-white text-lg">Điện thoại</h3>
+      <p id="contact-phone" class="text-blue-100 font-medium">0986445698</p>
+     </div>
+
+     <!-- Location Card -->
+     <div class="contact-card bg-white bg-opacity-10 backdrop-blur p-8 rounded-xl border border-white border-opacity-30 hover:bg-opacity-20 transition-all duration-300 ripple-effect animate-slideInRight opacity-0" style="animation-delay: 0.3s;">
+      <div class="text-5xl mb-4">📍</div>
+      <h3 class="font-bold mb-3 text-white text-lg">Địa chỉ</h3>
+      <p class="text-blue-100 font-medium">Hà Nội, Việt Nam</p>
+     </div>
+    </div>
+
+    <div class="text-center">
+     <a href="mailto:vietnguyendj2004@gmail.com" class="inline-block bg-white text-indigo-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-blue-400/50">
+      Gửi thư cho tôi →
+     </a>
+    </div>
+   </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-8 px-4 bg-gray-900 text-white">
+   <div class="max-w-6xl mx-auto text-center">
+    <p class="text-gray-400">© 2024 IT Business Analyst Portfolio. All rights reserved.</p>
+   </div>
+  </footer>
+  <script>
+        // Default configuration
+        const defaultConfig = {
+            hero_name: "Nguyễn Minh Tuấn",
+            hero_title: "Senior IT Business Analyst", 
+            hero_description: "Chuyên gia phân tích nghiệp vụ với 5+ năm kinh nghiệm trong việc cầu nối giữa business và technology",
+            about_text: "Tôi là một IT Business Analyst với đam mê chuyển đổi các yêu cầu nghiệp vụ phức tạp thành các giải pháp công nghệ hiệu quả. Với kinh nghiệm sâu rộng trong phân tích hệ thống, quản lý dự án và tối ưu hóa quy trình, tôi đã giúp nhiều doanh nghiệp đạt được mục tiêu số hóa của họ.",
+            contact_email: "tuan.nguyen@example.com",
+            contact_phone: "+84 123 456 789",
+            background_color: "#f8fafc",
+            surface_color: "#ffffff", 
+            text_color: "#1f2937",
+            primary_action_color: "#3b82f6",
+            secondary_action_color: "#8b5cf6",
+            font_family: "Inter",
+            font_size: 16
+        };
+
+        // Initialize Element SDK
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig: defaultConfig,
+                onConfigChange: async (config) => {
+                    // Update text content
+                    const heroName = document.getElementById('hero-name');
+                    const heroTitle = document.getElementById('hero-title');
+                    const heroDescription = document.getElementById('hero-description');
+                    const aboutText = document.getElementById('about-text');
+                    const contactEmail = document.getElementById('contact-email');
+                    const contactPhone = document.getElementById('contact-phone');
+
+                    if (heroName) heroName.textContent = config.hero_name || defaultConfig.hero_name;
+                    if (heroTitle) heroTitle.textContent = config.hero_title || defaultConfig.hero_title;
+                    if (heroDescription) heroDescription.textContent = config.hero_description || defaultConfig.hero_description;
+                    if (aboutText) aboutText.textContent = config.about_text || defaultConfig.about_text;
+                    if (contactEmail) contactEmail.textContent = config.contact_email || defaultConfig.contact_email;
+                    if (contactPhone) contactPhone.textContent = config.contact_phone || defaultConfig.contact_phone;
+
+                    // Update colors
+                    const backgroundColor = config.background_color || defaultConfig.background_color;
+                    const surfaceColor = config.surface_color || defaultConfig.surface_color;
+                    const textColor = config.text_color || defaultConfig.text_color;
+                    const primaryActionColor = config.primary_action_color || defaultConfig.primary_action_color;
+                    const secondaryActionColor = config.secondary_action_color || defaultConfig.secondary_action_color;
+
+                    document.body.style.background = `linear-gradient(to bottom right, ${backgroundColor}, #ffffff, #f3e8ff)`;
+                    document.body.style.color = textColor;
+
+                    // Update surface colors (glass effects, cards)
+                    const glassElements = document.querySelectorAll('.glass-effect');
+                    glassElements.forEach(el => {
+                        el.style.backgroundColor = `${surfaceColor}40`;
+                        el.style.borderColor = `${surfaceColor}4d`;
+                    });
+
+                    // Update primary action colors (main buttons)
+                    const primaryButtons = document.querySelectorAll('button');
+                    primaryButtons.forEach(btn => {
+                        btn.style.background = `linear-gradient(to right, ${primaryActionColor}, ${secondaryActionColor})`;
+                    });
+
+                    // Update font
+                    const customFont = config.font_family || defaultConfig.font_family;
+                    const baseFontStack = 'system-ui, -apple-system, sans-serif';
+                    document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+
+                    // Update font sizes
+                    const baseSize = config.font_size || defaultConfig.font_size;
+                    const heroNameEl = document.getElementById('hero-name');
+                    const heroTitleEl = document.getElementById('hero-title');
+                    
+                    if (heroNameEl) heroNameEl.style.fontSize = `${baseSize * 3.5}px`;
+                    if (heroTitleEl) heroTitleEl.style.fontSize = `${baseSize * 1.5}px`;
+                    
+                    // Update other text elements proportionally
+                    const headings = document.querySelectorAll('h2');
+                    headings.forEach(h => h.style.fontSize = `${baseSize * 2}px`);
+                    
+                    const subheadings = document.querySelectorAll('h3');
+                    subheadings.forEach(h => h.style.fontSize = `${baseSize * 1.25}px`);
+                    
+                    const paragraphs = document.querySelectorAll('p');
+                    paragraphs.forEach(p => p.style.fontSize = `${baseSize}px`);
+                },
+                mapToCapabilities: (config) => ({
+                    recolorables: [
+                        {
+                            get: () => config.background_color || defaultConfig.background_color,
+                            set: (value) => {
+                                config.background_color = value;
+                                window.elementSdk.setConfig({ background_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.surface_color || defaultConfig.surface_color,
+                            set: (value) => {
+                                config.surface_color = value;
+                                window.elementSdk.setConfig({ surface_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.text_color || defaultConfig.text_color,
+                            set: (value) => {
+                                config.text_color = value;
+                                window.elementSdk.setConfig({ text_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.primary_action_color || defaultConfig.primary_action_color,
+                            set: (value) => {
+                                config.primary_action_color = value;
+                                window.elementSdk.setConfig({ primary_action_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+                            set: (value) => {
+                                config.secondary_action_color = value;
+                                window.elementSdk.setConfig({ secondary_action_color: value });
+                            }
+                        }
+                    ],
+                    borderables: [],
+                    fontEditable: {
+                        get: () => config.font_family || defaultConfig.font_family,
+                        set: (value) => {
+                            config.font_family = value;
+                            window.elementSdk.setConfig({ font_family: value });
+                        }
+                    },
+                    fontSizeable: {
+                        get: () => config.font_size || defaultConfig.font_size,
+                        set: (value) => {
+                            config.font_size = value;
+                            window.elementSdk.setConfig({ font_size: value });
+                        }
+                    }
+                }),
+                mapToEditPanelValues: (config) => new Map([
+                    ["hero_name", config.hero_name || defaultConfig.hero_name],
+                    ["hero_title", config.hero_title || defaultConfig.hero_title],
+                    ["hero_description", config.hero_description || defaultConfig.hero_description],
+                    ["about_text", config.about_text || defaultConfig.about_text],
+                    ["contact_email", config.contact_email || defaultConfig.contact_email],
+                    ["contact_phone", config.contact_phone || defaultConfig.contact_phone]
+                ])
+            });
+        }
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', function() {
+                // Simple mobile menu toggle functionality
+                const nav = document.querySelector('nav');
+                nav.classList.toggle('mobile-menu-open');
+            });
+        }
+
+        // Lazy loading for images
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.onload = () => {
+                        img.classList.add('loaded');
+                    };
+                    observer.unobserve(img);
+                }
+            });
+        }, {
+            rootMargin: '50px',
+            threshold: 0.01
+        });
+
+        document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+            imageObserver.observe(img);
+        });
+
+        // Animate skill bars when in view
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const skillBars = entry.target.querySelectorAll('.skill-progress');
+                    skillBars.forEach(bar => {
+                        const width = bar.getAttribute('data-width');
+                        setTimeout(() => {
+                            bar.style.width = width + '%';
+                        }, 200);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        const skillsSection = document.getElementById('skills');
+        if (skillsSection) {
+            observer.observe(skillsSection);
+        }
+
+        // Add scroll-triggered animations
+        const animateOnScroll = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.animate-slideInLeft, .animate-slideInRight, .animate-fadeInUp').forEach(el => {
+            animateOnScroll.observe(el);
+        });
+
+        // Water drop animation - falling drops throughout the page
+        function createWaterDrop() {
+            const drop = document.createElement('div');
+            drop.className = 'water-drop drop-fall';
+            drop.innerHTML = '💧';
+            drop.style.left = Math.random() * 100 + 'vw';
+            drop.style.top = '-50px';
+            
+            const duration = Math.random() * 3 + 4; // 4-7 seconds
+            drop.style.setProperty('--duration', duration + 's');
+            
+            document.body.appendChild(drop);
+            
+            setTimeout(() => {
+                drop.remove();
+            }, duration * 1000);
+        }
+
+        // Create water drops continuously
+        setInterval(createWaterDrop, 500);
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99e62b2c543a8b94',t:'MTc2MzExOTc0MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
